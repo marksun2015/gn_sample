@@ -1,5 +1,6 @@
 ## Build steps
     need: 
+    $ export PATH="$PATH:/mnt/sg2/chromium/weintek/chromium-dev/depot_tools"   
     $ export CHROMIUM_BUILDTOOLS_PATH=/mnt/sg2/chromium/chromium/src/buildtools
 
     $ gn gen out
