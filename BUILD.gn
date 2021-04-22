@@ -1,3 +1,11 @@
+import("gni/sample.gni")
+
+#assert(is_linux, "//weintek should build with is_linux = true")
+
 group("executable") {
     deps = [ "//main" ]
+}
+
+if (is_linux) {
+    print("is_linux case")
 }
