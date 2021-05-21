@@ -1,9 +1,9 @@
 declare_args() {  
-    toolchain_path = getenv("CLANGCXX")
+    toolchain_path = ""
 }
 
 toolchain("linux") {
-    cxx = "${toolchain_path}"
+    cxx = "clang++"
 
     tool("cxx"){
         command = "${cxx} -c {{source}} -o {{output}}"
@@ -17,3 +17,20 @@ toolchain("linux") {
             outputs = ["$exe_name"]
     }
 }
+
+toolchain("cross_target") {
+    cxx = getenv("CLANGCXX")
+
+    tool("cxx"){
+        command = "${cxx} -c {{source}} -o {{output}}"
+            outputs = [ "{{source_out_dir}}/{{target_output_name}}.o" ]
+
+    }
+
+    tool("link"){
+        exe_name = "{{root_out_dir}}/{{target_output_name}}{{output_extension}}"
+            command = "${cxx} {{inputs}} -o $exe_name"
+            outputs = ["$exe_name"]
+    }
+}
+

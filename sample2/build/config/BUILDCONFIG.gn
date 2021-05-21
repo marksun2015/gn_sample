@@ -1,1 +1,10 @@
-set_default_toolchain("//build/config/toolchains:linux")
+declare_args() {  
+    is_custom_toolchain = false
+}
+
+if (is_custom_toolchain) {
+    set_default_toolchain("//build/config/toolchains:cross_target")
+} else {
+    set_default_toolchain("//build/config/toolchains:linux")
+}
+
